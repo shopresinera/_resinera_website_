@@ -3,47 +3,501 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resin Era</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Resin Era - Playtime that Doesn't Pollute</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- This style block contains all the CSS for your website -->
+    <style>
+        /* --- Global Styles --- */
+        :root {
+            --primary-bg: #F8F5F1;
+            --secondary-bg: #EAE3D2;
+            --accent-green: #385E4E;
+            --accent-terracotta: #A5564A;
+            --text-dark: #333;
+            --text-light: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+    
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--primary-bg);
+        }
+    
+        a {
+            text-decoration: none;
+            color: var(--accent-green);
+        }
+    
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+    
+        /* --- Header & Navigation --- */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+    
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-green);
+        }
+    
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+    
+        .nav-links a {
+            color: var(--text-dark);
+            font-weight: bold;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+    
+        .nav-links a.active, .nav-links a:hover {
+            color: var(--accent-terracotta);
+        }
+    
+        /* Mobile Nav */
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+    
+        /* --- Page Sections --- */
+        .page-content {
+            padding-top: 4rem; /* Add padding to prevent content from hiding behind the sticky header */
+            margin-top: -4rem;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .page-header h1 {
+            color: var(--accent-green);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+    
+        /* --- Hero Section (Homepage) --- */
+        #home {
+            min-height: 100vh; /* Full viewport height */
+            background-image: url('https://i.ibb.co/hJq84XvQ/Whats-App-Image-2025-07-28-at-21-01-13.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        /* Overlay to improve text readability on the hero image */
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* 40% black overlay */
+        }
+    
+        .hero-text {
+            position: relative; /* Make sure text is above the overlay */
+            z-index: 1;
+            color: var(--text-light); /* Change text color to white for contrast */
+        }
+        
+        .hero-text h1 {
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+    
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-button {
+            background-color: var(--accent-terracotta);
+            color: var(--text-light);
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+    
+        .cta-button:hover {
+            background-color: #7d443b;
+        }
+    
+        /* --- Products Section --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+    
+        .product-item {
+            background-color: var(--secondary-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+    
+        .product-item:hover {
+            transform: translateY(-10px);
+        }
+    
+        .product-item img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+    
+        .shop-button {
+            display: inline-block;
+            background-color: var(--accent-green);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+        }
+    
+        .shop-button:hover {
+            background-color: #2e4a3d;
+        }
+
+        /* --- Content Blocks --- */
+        .content-block {
+            background-color: var(--secondary-bg);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .content-block h2 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .content-block p {
+            margin-bottom: 1rem;
+        }
+    
+        .hindi-quote {
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        .core-values ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .core-values li {
+            margin-bottom: 0.5rem;
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .core-values i {
+            margin-right: 10px;
+        }
+    
+        /* --- Contact Form --- */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+    
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+    
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+    
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: var(--primary-bg);
+        }
+    
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--accent-green);
+            color: var(--text-light);
+            margin-top: 2rem;
+        }
+    
+        footer .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+        }
+    
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background-color: var(--secondary-bg);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                z-index: 10;
+                box-shadow: var(--shadow);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links li {
+                padding: 1rem 0;
+                border-top: 1px solid var(--primary-bg);
+            }
+            .burger {
+                display: flex;
+            }
+    
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
-
     <header>
+        <div class="logo">ResinEra</div>
         <nav>
-            <a href="#" class="logo">Resin Era</a>
-            <div class="nav-links">
-                <a href="#">About</a>
-                <a href="#">Products</a>
-                <a href="#">Contact</a>
-            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about-us">About Us</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#our-impact">Our Impact</a></li>
+                <li><a href="#plastic-problem">The Plastic Problem</a></li>
+                <li><a href="#our-solution">Our Solution</a></li>
+                <li><a href="#contact-us">Contact Us</a></li>
+            </ul>
         </nav>
+        <div class="burger" onclick="toggleMenu()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
     </header>
 
     <main>
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1>RESIN ERA</h1>
-                <h2>Playtime That Doesn't Pollute.</h2>
-                <p>Discover eco-friendly, durable, and artistic toys that shape a better future.</p>
+        <!-- Section 1: Home Page -->
+        <section id="home" class="page-content">
+            <div class="hero">
+                <div class="hero-text">
+                    <h1>Playtime that Doesn't Pollute.</h1>
+                    <p>Discover eco-friendly, artistic, and durable educational toys for a brighter future.</p>
+                </div>
             </div>
         </section>
-        
-        <section class="story-section">
-            <div class="story-content">
-                <h3>Our Story: From Plastic to Purpose</h3>
-                <p>The Resin Era was born from a simple idea: playtime shouldn't come at the cost of our planet. We saw an opportunity to transform discarded plastic into beautiful, durable, and safe resin art.</p>
+
+        <!-- Section 2: About Us -->
+        <section id="about-us" class="page-content">
+            <div class="page-header">
+                <h1>Our Mission: A New Resin Era</h1>
+                <p>Because the only thing that should outlast childhood... are the values they grew up with.</p>
+            </div>
+            <div class="content-block">
+                <h2>Our Story</h2>
+                <p>Resin Era was founded with a simple yet powerful mission: to create toys that are as good for the planet as they are for a child's development. We believe that playtime should be a source of joy, not a source of plastic waste. Our handcrafted resin toys are the result of this passion, designed to be beautiful, educational, and sustainable.</p>
+                <p>We are a small team dedicated to handcrafting each piece with care and a commitment to quality. Our journey is about more than just making toys; it's about starting a conversation and inspiring a new era of conscious consumerism.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: Our Products -->
+        <section id="products" class="page-content">
+            <div class="page-header">
+                <h1>Our Educational Toy Collection</h1>
+                <p>Explore our handcrafted alphabet and number sets, designed for conscious learning and joyful play.</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-item">
+                    <img src="https://i.ibb.co/qYL0XyC9/Whats-App-Image-2025-08-02-at-22-11-18-1.jpg" alt="Alphabet Set - Blue and Yellow">
+                    <a href="#" class="shop-button">View Details</a>
+                </div>
+                <div class="product-item">
+                    <img src="https://i.ibb.co/MxbJf5NK/Whats-App-Image-2025-08-02-at-22-11-16.jpg" alt="Alphabet Set - Orange">
+                    <a href="#" class="shop-button">View Details</a>
+                </div>
+                <div class="product-item">
+                    <img src="https://i.ibb.co/BHWY18S6/Whats-App-Image-2025-08-02-at-22-11-17.jpg" alt="Number Set - Floral">
+                    <a href="#" class="shop-button">View Details</a>
+                </div>
+                <div class="product-item">
+                    <img src="https://i.ibb.co/VchPFszc/Whats-App-Image-2025-07-31-at-23-01-23.jpg" alt="Alphabet Set - Colorful">
+                    <a href="#" class="shop-button">View Details</a>
+                </div>
+                <div class="product-item">
+                    <img src="https://i.ibb.co/dsQW5jJx/Whats-App-Image-2025-07-31-at-22-52-51.jpg" alt="Alphabet Set - Pastel">
+                    <a href="#" class="shop-button">View Details</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Our Impact -->
+        <section id="our-impact" class="page-content">
+            <div class="page-header">
+                <h1>Our Impact: Crafting a Better Tomorrow</h1>
+                <p>Every toy we create is a step toward a more sustainable and beautiful world.</p>
+            </div>
+            <div class="content-block">
+                <h2>Our Commitment to Sustainability</h2>
+                <p>At Resin Era, we are deeply committed to leaving a smaller carbon footprint. Our toys are made with high-quality, sustainable resin, a stark contrast to the millions of plastic toys that end up in landfills every year. By choosing our products, you are directly contributing to a healthier planet for the next generation.</p>
+                <div class="core-values">
+                    <h3>Key Impact Areas:</h3>
+                    <ul>
+                        <li><i class="fas fa-leaf"></i> Eco-Friendly Materials: We prioritize materials that are kind to the environment.</li>
+                        <li><i class="fas fa-recycle"></i> Longer Durability: Our toys are built to last, reducing the need for frequent replacements.</li>
+                        <li><i class="fas fa-globe-americas"></i> Smaller Carbon Footprint: Sustainable production methods and local sourcing help minimize our environmental impact.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: The Plastic Problem -->
+        <section id="plastic-problem" class="page-content">
+            <div class="page-header">
+                <h1>The Plastic Problem: A Toy Story</h1>
+                <p>Let's face the facts: traditional toys are often part of a much larger global issue.</p>
+            </div>
+            <div class="content-block">
+                <h2>A Playground of Plastic</h2>
+                <p>Plastic toys are everywhere. They are cheap to produce, easy to buy, and often just as easy to discard. This cycle of consumption creates a staggering amount of waste that takes hundreds of years to decompose, releasing microplastics into our environment and harming wildlife.</p>
+                <p class="hindi-quote">Yeh ek chhoti si cheez hai, jo ek bahut bade problem ka hissa ban jaati hai.</p>
+                <p>Every plastic toy ever made is likely still on our planet, in some form. We believe it's time for a change.</p>
+            </div>
+        </section>
+
+        <!-- Section 6: Our Solution -->
+        <section id="our-solution" class="page-content">
+            <div class="page-header">
+                <h1>Our Solution: Co-creating a New Era</h1>
+                <p>Our toys are not just products; they are a conscious choice for a better future.</p>
+            </div>
+            <div class="content-block">
+                <h2>Why Resin Era?</h2>
+                <p>Our solution is simple: create a premium, durable, and sustainable alternative to plastic. Each of our toys is a handcrafted work of art that fosters learning and creativity while being gentle on the planet.</p>
+                <div class="core-values">
+                    <h3>Our Toys Are:</h3>
+                    <ul>
+                        <li><i class="fas fa-check-square"></i> **Eco-Friendly:** Made with non-toxic, sustainable resin.</li>
+                        <li><i class="fas fa-check-square"></i> **Durable:** Built to withstand years of play, not just a few weeks.</li>
+                        <li><i class="fas fa-check-square"></i> **Artistic:** Each piece is a unique work of art, beautiful enough to be cherished for a lifetime.</li>
+                    </ul>
+                </div>
+                <p class="final-motto">It’s not just a toy—it’s a statement.</p>
+            </div>
+        </section>
+
+        <!-- Section 7: Contact Us -->
+        <section id="contact-us" class="page-content">
+            <div class="page-header">
+                <h1>Get in Touch</h1>
+                <p>Have a question about our products or want to discuss a custom order? We'd love to hear from you!</p>
+            </div>
+            <div class="content-block">
+                <form action="#" method="POST" class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Send Message</button>
+                </form>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Resin Era. All rights reserved.</p>
-        <p>
-            <a href="mailto:resinerab@gmail.com">Email</a> | 
-            <a href="https://www.instagram.com/your-insta-handle">Instagram</a> | 
-            <a href="#">Twitter</a>
-        </p>
+        <p>&copy; 2025 Resin Era. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/_resinera__" target="_blank"><i class="fab fa-instagram"></i></a>
+            <!-- Added a mailto link for your email address -->
+            <a href="mailto:resinera6@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
     </footer>
 
+    <!-- This script block contains the JavaScript for the mobile menu -->
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+            const burger = document.querySelector('.burger');
+            burger.classList.toggle('toggle');
+        }
+    </script>
 </body>
 </html>
